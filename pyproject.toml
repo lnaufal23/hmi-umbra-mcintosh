@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hmi-umbra"
+version = "1.0.0"
+description = "Shared parameters and path configuration for the hmi-umbra-mcintosh pipeline"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Luthfi Naufal"}]
+requires-python = ">=3.10"
+dependencies = ["PyYAML"]
+
+[tool.setuptools]
+packages = ["hmi_umbra"]

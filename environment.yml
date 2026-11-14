@@ -1,0 +1,27 @@
+name: hmi-umbra
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - scikit-image
+  - astropy
+  - sunpy
+  - pillow
+  - opencv
+  - pyyaml
+  - tqdm
+  - xgboost
+  - pytorch
+  - torchvision
+  - pytorch-cuda
+  - pip
+  - pip:
+      - segmentation-models-pytorch
+      - albumentations

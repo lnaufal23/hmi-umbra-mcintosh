@@ -1,0 +1,59 @@
+# Data and output locations. Defaults are the paths used for the paper (X99 and bbn3);
+# edit them for another machine, or point HMI_UMBRA_CONFIG to a copy of this file.
+paths:
+  # Raw hmi.Ic_720s continuum FITS, one per day: {year}/hmi.ic_720s.YYYYMMDD_000000_TAI.N.continuum.fits
+  raw_fits: /data/research/sdo_hmi_fits_fullres/raw_fits/daily_dataset
+  # Clipped PSF+LD product (correction/correct_psf_ld.py): {year}/*.continuum.psf_ld.fits
+  psf_ld_fits: /data/projects/sdo_hmi_fits_fullres/processed_fits/psf_ld
+  # 8-bit opt_F full-disk PNG (correction/make_optf.py): {year}/*.png
+  optf_png: /mnt/sda1/x99_offload/optf_4096
+  # U-Net training crops of active regions and their masks (segmentation/train_seg_crops.py)
+  seg_crops: /home/server/png_production_4096/crops_full
+  seg_masks_crop: /home/server/png_production_4096/masks_crop
+  seg_masks_fulldisk_train: /home/server/png_production_4096/masks_3class
+  # Location of the crops listed in the saved train/val/test split files
+  seg_crops_split: /home/server/png_production_4096/crops_unet_split
+  # Training runs; the production model is <seg_runs>/unet_resnet34/best_model.pt
+  seg_runs: /home/server/png_production_4096/segmentation/runs
+  # Full-disk masks from segmentation/infer_masks_fulldisk.py: {year}/{stem}_pred.png
+  masks_fulldisk: /mnt/sda1/x99_offload/pred_masks_fulldisk_v4
+  # Per-umbra and per-day tables on the clipped product (photometry/stats_v4.py)
+  stats_clipped_out: ~/stats_v4
+  # Unclipped photometry (photometry/photometry_unclipped.py), incl. hist/ class histograms
+  stats_unclipped_out: ~/review_ai02/noclip_t1
+  # RMS contrast and photospheric distribution (photometry/rms_contrast.py)
+  rms_contrast_out: ~/review_ai02/rms_contrast
+  # Daily I_qs, class statistics, spot counts and boundary histograms on the clipped product
+  analysis_v4mask: /home/server/png_production_4096/analysis_v4mask
+  # Same quantities from the previous (tiled) masks, used only for comparison
+  analysis_legacy_masks: /home/server/png_production_4096/analysis_threshold
+  # SILSO daily total sunspot number, SN_d_tot_V2.0.csv
+  silso_daily: /home/server/png_production_4096/analysis_ar_detection/SN_d_tot_V2.0.csv
+  # Fit outputs (darkness_fits/*)
+  fits_out: ~/review_ai02/fit3a
+  # Null-test outputs (darkness_fits/null_tests_perday.py)
+  null_tests_out: ~/review_ai02/nulltest
+  # Diagnostic plots for visual checks
+  check_plots: ~/Desktop/check_unclipped
+  # McIntosh classification root: final_annotations/, crops_4096/, srs_match/, audit_cvat/export/,
+  # train_audit/ (CNN runs) and opt_v5/ (OOF dumps, morphology, XGBoost, fusion, confidence, final lock)
+  cls_root: /mnt/sda1/x99_offload/ar_crop_pipeline
+  # 1024 x 1024 opt_F PNG used for the CVAT box annotation: {year}/YYYYMMDD.png
+  ar_png_1024: /home/server/cvat_ar_obb/images_1024
+  # Per-day WCS keywords of the full-disk FITS (DATE_OBS, CRPIX, CRVAL, CDELT)
+  fits_wcs_cache: /home/server/png_production_4096/metadata_full/fits_wcs_cache.csv
+  # NOAA SRS: raw files {YYYYMMDD}SRS.txt and the parsed table up to 2026-04-30
+  srs_raw_dir: /home/server/audit_workspace/srs_raw_files
+  srs_csv: /home/server/audit_workspace/srs_all_fresh.csv
+  # Paper figures (figures/*)
+  paper_figs: ~/paper/fig
+  # Daily spot counts from the previous (tiled) masks, for the legacy-vs-v4 comparison in figures/regen_figs_v4mask.py
+  spot_count_legacy: /home/server/png_production_4096/spot_count_per_day.csv
+  # PSF demonstration day 2014-10-23: input/ raw FITS, output/ PSF-only and PSF+LD FITS and the panels
+  psf_demo_dir: /home/server/psf_demo_20141023
+
+# Host-specific entries (matched against the machine's hostname) override the ones above.
+hosts:
+  bbn3:
+    masks_fulldisk: ~/masks_v4
+    paper_figs: ~/review_ai02/fig_paper

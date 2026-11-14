@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+*.fits
+*.npz
+*.pt
+*.png
+*.jpg
+*.csv
